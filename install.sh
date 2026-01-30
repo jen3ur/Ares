@@ -15,6 +15,9 @@ echo "             -- Installer --"
 
 sleep 3
 
+#add visual feedback so you are aware of the script running
+#do printf "installing [ ]" when runngin and "installing [✓] when done"
+
 echo "disableing screen saver and sleep while installing"
 
 gsettings set org.gnome.desktop.screensaver lock-enabled false
@@ -53,44 +56,55 @@ echo "done [✓]"
 
 echo "installing starship..."
 #install starship
-curl -sS https://starship.rs/install.sh | sh
+curl -sS https://starship.rs/install.sh | sh > /dev/null 2>&1
 echo "done [✓]"
 sleep 2
 
 echo "installing jetbrains mono font..."
 #install font jetbrains mono 
-mkdir ~/.fonts
+mkdir ~/.fonts > /dev/null 2>&1
 sleep 1
 wget -q --show-progress -P ~/.fonts/ https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip
-unzip -o ~/.fonts/JetBrainsMono.zip -d ~/.fonts/
-rm ~/.fonts/JetBrainsMono.zip
+unzip -o ~/.fonts/JetBrainsMono.zip -d ~/.fonts/ > /dev/null 2>&1
+rm ~/.fonts/JetBrainsMono.zip > /dev/null 2>&1
 echo "done [✓]"
 
 echo "Downloading wallpapperpack..."
-mkdir ~/walls  # > /dev/null 2>&1
+mkdir ~/walls > /dev/null 2>&1
 sleep 1
 wget -q --show-progress -P ~/walls/ https://github.com/JustAdumbPrsn/Zen-Nebula/releases/download/v3.1/Wallpapers.rar
 sleep 2
-unrar x ~/walls/Wallpapers.rar ~/walls/
-rm ~/walls/Wallpapers.rar
+unrar x ~/walls/Wallpapers.rar ~/walls/ > /dev/null 2>&1
+rm ~/walls/Wallpapers.rar > /dev/null 2>&1
+echo "update done [✓]"
+
+echo "changing shell to zsh..."
+sleep 2
+#change shell
+chsh -s $(which zsh) > /dev/null 2>&1
+echo "done [✓]"
+
+echo "adding dotfiles... if there are any error fix and then rerun "stow ." from .dotfiles..."
+sleep 2
+cp -R .dotfiles ~/.dotfiles > /dev/null 2>&1
+cd ~/.dotfiles > /dev/null 2>&1
+stow .
+cd -
 echo "update done [✓]"
 
 echo "staring dank shell materials intaller..."
 #install dms
 curl -fsSL https://install.danklinux.com | sh
 echo "done [✓]"
-sleep 5
-
-echo "changing shell to zsh..."
-#change shell
-chsh -s $(which zsh)   #  # > /dev/null 2>&1
-echo "done [✓]"
+sleep 2
 
 echo "once rebooted run post-install.sh..."
 sleep 2
 echo "reenabling screen saver and sleep"
 gsettings set org.gnome.desktop.screensaver lock-enabled true
 gsettings set org.gnome.desktop.session idle-delay 300
+
+#add countdown loop
 echo "restaring system in 10 sec..."
 sleep 9
 echo "see you soon!"
