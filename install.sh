@@ -27,7 +27,7 @@ echo "update done [✓]"
 
 echo "installing basic packages..."
 #install packages
-sudo apt install -y curl unrar git fzf fd-find eza bat zsh btop cargo cava flatpak timeshift fastfetch fonts-font-awesome zoxide luarocks tealdeer ripgrep stow make cmake > /dev/null 2>&1
+sudo apt install -y curl starship unrar git fzf fd-find eza bat zsh btop cargo cava flatpak timeshift fastfetch fonts-font-awesome zoxide luarocks tealdeer ripgrep stow make cmake > /dev/null 2>&1
 echo "done [✓]"
 
 echo "adding flatpak and installing packages..."
@@ -50,12 +50,6 @@ echo "installing icon package..."
 #icon pack
 wget -qO- https://git.io/papirus-icon-theme-install | sh > /dev/null 2>&1
 echo "done [✓]"
-
-echo "installing starship..."
-#install starship
-curl -sS https://starship.rs/install.sh | sh
-echo "done [✓]"
-sleep 2
 
 echo "installing jetbrains mono font..."
 #install font jetbrains mono 
