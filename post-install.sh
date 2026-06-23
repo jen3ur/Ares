@@ -50,12 +50,5 @@ echo "update done [✓]"
 echo "remeber to set up backup scheduel..."
 sleep 3
 
-echo "adding dotfiles... if there are any error fix and then rerun "stow ." from .dotfiles..."
-cp -R .dotfiles ~/.dotfiles
-cd ~/.dotfiles
-stow .
-cd -
-echo "update done [✓]"
-
 echo "DONE!"
 echo "any errors with the stow command? fix it and rerun it."
